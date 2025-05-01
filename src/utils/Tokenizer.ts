@@ -26,11 +26,11 @@ export const Tokenizer = (input: string) => {
       continue
     }
 
-    const numberRegx = /[0-9]/
+    const numberRegex = /[0-9]/
 
-    if (numberRegx.test(char)) {
+    if (numberRegex.test(char)) {
       let value = ""
-      while (numberRegx.test(char) && current < input.length) {
+      while (numberRegex.test(char) && current < input.length) {
         value += char
         char = input[++current]
       }
@@ -42,11 +42,11 @@ export const Tokenizer = (input: string) => {
       continue
     }
 
-    const nameRgex = /[a-z]/
+    const nameRegex = /[a-z]/
 
-    if (nameRgex.test(char)) {
+    if (nameRegex.test(char)) {
       let value = ""
-      while (nameRgex.test(char) && current < input.length) {
+      while (nameRegex.test(char) && current < input.length) {
         value += char
         char = input[++current]
       }
@@ -58,14 +58,14 @@ export const Tokenizer = (input: string) => {
       continue
     }
 
-    const blankRegx = /\s/
+    const blankRegex = /\s/
 
-    if (blankRegx.test(char)) {
+    if (blankRegex.test(char)) {
       current++
       continue
     }
 
-    throw new Error("unknow char type")
+    throw new Error("unknown char type")
   }
 
   return tokens
