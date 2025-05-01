@@ -13,6 +13,7 @@ export type Node = {
   name?: string
   params?: Node[]
   body?: Node[]
+  _context?: any
 }
 
 export const Parser = (Tokens: Token[]) => {
@@ -59,7 +60,7 @@ export const Parser = (Tokens: Token[]) => {
       return node
     }
 
-    throw new Error(`unknow type ${token.type}`)
+    throw new Error(`unknown type ${token.type}`)
   }
 
   const AST: Node = {

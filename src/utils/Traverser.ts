@@ -4,8 +4,7 @@ import { Node, NodeType } from "./Parser"
 export const Traverser = (ast: Node, visitor: visitor) => {
   function traverseArray(array: Node[], parent: Node | null) {
     array.forEach(node => {
-      const method = visitor[node.type]
-      method.enter && method.enter(node, parent)
+      traverseNode(node, parent)
     })
   }
 
@@ -19,10 +18,10 @@ export const Traverser = (ast: Node, visitor: visitor) => {
 
     switch (node.type) {
       case NodeType.Program:
-        traverseArray(node.body!, parent)
+        traverseArray(node.body!, node)
         break
       case NodeType.CallExpression:
-        traverseArray(node.params!, parent)
+        traverseArray(node.params!, node)
         break
       case NodeType.NumberLiteral:
       case NodeType.StringLiteral:

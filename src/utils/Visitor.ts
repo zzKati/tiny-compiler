@@ -13,15 +13,46 @@ export const Visitor: visitor = {
     exit(node, parent) {},
   },
   [NodeType.CallExpression]: {
-    enter(node, parent) {},
+    enter(node, parent) {
+      let expression: any = {
+        type: "CallExpression",
+        callee: {
+          type: "Identifier",
+          name: node.name,
+        },
+        arguments: [],
+      }
+
+      node._context = expression.arguments
+
+      if (parent?.type !== NodeType.CallExpression) {
+        // 说明 这个 expression 是顶层的
+        expression = {
+          type: "ExpressionStatement",
+          expression,
+        }
+      }
+
+      parent?._context.push(expression)
+    },
     exit(node, parent) {},
   },
   [NodeType.NumberLiteral]: {
-    enter(node, parent) {},
+    enter(node, parent) {
+      parent?._context.push({
+        type: "NumberLiteral",
+        value: node.value,
+      })
+    },
     exit(node, parent) {},
   },
   [NodeType.StringLiteral]: {
-    enter(node, parent) {},
+    enter(node, parent) {
+      parent?._context.push({
+        type: "StringLiteral",
+        value: node.value,
+      })
+    },
     exit(node, parent) {},
   },
 }
