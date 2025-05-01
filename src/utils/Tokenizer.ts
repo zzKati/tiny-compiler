@@ -5,7 +5,7 @@ export enum TokenType {
   Name, // 操作符
 }
 
-type Token = {
+export type Token = {
   type: TokenType
   value: string
 }
