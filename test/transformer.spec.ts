@@ -1,7 +1,6 @@
 import { transformer } from "../src/utils/Transformer"
 import { describe, expect, it } from "vitest"
 import { NodeType, Parser } from "../src/utils/Parser"
-import { TokenType } from "../src/utils/Tokenizer"
 
 describe("parser test", () => {
   it("test all", () => {
@@ -45,30 +44,30 @@ describe("parser test", () => {
             callee: {
               type: "Identifier",
               name: "add",
-              arguments: [
-                {
-                  type: "NumberLiteral",
-                  value: "2",
-                },
-                {
-                  type: "CallExpression",
-                  callee: {
-                    type: "Identifier",
-                    name: "subtract",
-                    arguments: [
-                      {
-                        type: "NumberLiteral",
-                        value: "4",
-                      },
-                      {
-                        type: "NumberLiteral",
-                        value: "2",
-                      },
-                    ],
-                  },
-                },
-              ],
             },
+            arguments: [
+              {
+                type: "NumberLiteral",
+                value: "2",
+              },
+              {
+                type: "CallExpression",
+                callee: {
+                  type: "Identifier",
+                  name: "subtract",
+                },
+                arguments: [
+                  {
+                    type: "NumberLiteral",
+                    value: "4",
+                  },
+                  {
+                    type: "NumberLiteral",
+                    value: "2",
+                  },
+                ],
+              },
+            ],
           },
         },
       ],
